@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3MTPS Pvt Ltd - Professional Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f6fb;
+      color: #222222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #003a5d;
+      padding: 30px 0 10px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0, 119, 200, 0.6);
+    }
+
+    .company-name {
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: 5px;
+      margin-bottom: 5px;
+    }
+
+    .company-name span {
+      display: inline-block;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    .company-name span:nth-child(1) {
+      color: #e03c31;
+    }
+
+    .company-name span:nth-child(2) {
+      color: #fbb034;
+    }
+
+    .company-name span:nth-child(3) {
+      color: #fff100;
+    }
+
+    .company-name span:nth-child(4) {
+      color: #31bc47;
+    }
+
+    .company-name span:nth-child(5) {
+      color: #2196f3;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px currentColor;
+      }
+
+      100% {
+        text-shadow: 0 0 25px currentColor;
+      }
+    }
+
+    header p.tagline {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    #loginBox {
+      background: white;
+      box-shadow: 0 10px 50px rgb(0 83 165 / 0.25);
+      max-width: 400px;
+      margin: 4rem auto;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    #loginBox h2 {
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    #loginBox input,
+    #addServiceInputs input,
+    #addServiceInputs textarea {
+      width: 80%;
+      padding: 12px;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      outline-offset: 0;
+      transition: border-color 0.3s ease;
+    }
+
+    #loginBox input:focus,
+    #addServiceInputs input:focus,
+    #addServiceInputs textarea:focus {
+      border-color: #0077c8;
+    }
+
+    #loginBox button,
+    #addServiceBtn,
+    .btn-save,
+    .btn-cancel {
+      font-size: 1.25rem;
+      background: #0077c8;
+      color: white;
+      border: none;
+      padding: 12px 40px;
+      cursor: pointer;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+      user-select: none;
+    }
+
+    #loginBox button:hover,
+    #addServiceBtn:hover,
+    .btn-save:hover,
+    .btn-cancel:hover {
+      background: #005ea1;
+    }
+
+    #errorMsg {
+      color: red;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      display: none;
+      flex-direction: column;
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    #searchContainer {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    #searchInput {
+      padding: 14px 18px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 12px rgb(0 119 200 / 0.15);
+      transition: border-color 0.3s ease;
+      outline-offset: 0;
+    }
+
+    #searchInput:focus {
+      border-color: #2196f3;
+    }
+
+    #servicesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: 18px;
+      padding: 20px 22px 30px;
+      box-shadow: 0 12px 35px rgb(0 119 200 / 0.15);
+      color: #fff;
+      transition: transform 0.2s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 55px rgb(0 119 200 / 0.3);
+      cursor: default;
+    }
+
+    .service-image {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 8px 22px rgb(0 0 0 / 0.25);
+      margin-bottom: 18px;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      user-select: none;
+    }
+
+    .service-title {
+      font-weight: 900;
+      font-size: 1.9rem;
+      margin-bottom: 8px;
+      user-select: none;
+    }
+
+    .service-description {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      user-select: text;
+      min-height: 95px;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      user-select: none;
+      box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+    }
+
+    .btn-edit {
+      background: #f7c948;
+    }
+
+    .btn-edit:hover {
+      background: #e6b837;
+    }
+
+    .btn-remove {
+      background: #e34942;
+    }
+
+    .btn-remove:hover {
+      background: #be362e;
+    }
+
+    /* Additional buttons for add & cancel save */
+    .btn-save {
+      background-color: #31bc47;
+    }
+
+    .btn-cancel {
+      background-color: #ccc;
+      color: #222;
+    }
+
+    #addServiceArea {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px 25px;
+      box-shadow: 0 12px 35px rgb(0 119 200 / 0.12);
+      margin: 1rem auto 2rem;
+      max-width: 620px;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #addServiceArea label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 5px;
+      user-select: none;
+    }
+
+    #addServiceBtn {
+      font-size: 1.4rem;
+      background: #31bc47;
+      padding: 18px 35px;
+      width: 350px;
+      border-radius: 25px;
+      margin: 1.8rem auto 0;
+      color: white;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      display: block;
+      box-shadow: 0 6px 20px rgb(49 188 71 / 0.5);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    #addServiceBtn:hover {
+      background: #288f37;
+    }
+
+    .goldloans {
+      background: linear-gradient(135deg, #fed766, #f7b733);
+      color: #243342;
+    }
+
+    .edibleoils {
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    }
+
+    .dryfruits {
+      background: linear-gradient(135deg, #fbc1cc, #f87291);
+    }
+
+    .spices {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #3a2f0b;
+    }
+
+    .millets {
+      background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    }
+
+    .produce {
+      background: linear-gradient(135deg, #43cea2, #185a9d);
+    }
+
+    .dynamodb {
+      background: linear-gradient(135deg, #d66d75, #e29587);
+      color: #512c2c;
+    }
+
+    .education {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+    }
+
+    .fertilizers {
+      background: linear-gradient(135deg, #76b852, #8DC26F);
+      color: #1d3a04;
+    }
+
+    .legal {
+      background: linear-gradient(135deg, #b24592, #f15f79);
+    }
+
+    .notebooks {
+      background: linear-gradient(135deg, #29c7ec, #046893);
+    }
+
+    .editable[contenteditable="true"] {
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      border: 2px dashed #0077c8;
+    }
+
+    .editable:focus {
+      outline: none;
+      border-color: #004a8a;
+      box-shadow: 0 0 12px rgba(0, 119, 200, 0.7);
+    }
+
+    .service-card[contenteditable="true"] {
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 480px) {
+      .service-card {
+        padding: 12px 15px 22px;
+      }
+
+      .service-title {
+        font-size: 1.6rem;
+      }
+
+      #addServiceBtn {
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header role="banner">
+    <div class="company-name" aria-label="Company name 3 M T P S">
+      <span>3</span><span>M</span><span>T</span><span>P</span><span>S</span> Pvt Ltd
+    </div>
+    <p class="tagline" aria-label="Company tagline">Public Health and Wealth are Our Happiness</p>
+  </header>
+
+  <div id="loginBox" role="form" aria-labelledby="loginTitle" aria-describedby="loginDesc">
+    <h2 id="loginTitle">Login to Access 3MTPS Services</h2>
+    <p id="loginDesc">Username and password are required</p>
+    <div id="errorMsg" aria-live="polite"></div>
+    <input type="text" id="username" aria-label="Username" placeholder="Username" autocomplete="username" />
+    <input type="password" id="password" aria-label="Password" placeholder="Password" autocomplete="current-password" />
+    <button onclick="login()" aria-label="Login button">Login</button>
+  </div>
+
+  <main aria-label="Main content">
+    <div id="searchContainer">
+      <input id="searchInput" type="search" placeholder="Search services..." aria-label="Search services" oninput="filterServices()">
+    </div>
+
+    <section id="addServiceArea">
+      <label for="newTitle">Service Title</label>
+      <input id="newTitle" placeholder="Enter service title..." />
+      <label for="newDesc">Service Description</label>
+      <textarea id="newDesc" placeholder="Enter service description..." rows="4"></textarea>
+      <label for="newImage">Service Image URL</label>
+      <input id="newImage" placeholder="Enter image URL or local path" />
+      <div style="display:flex; gap:15px; margin-top:12px;">
+        <button class="btn-save" onclick="saveNewService()">Save Service</button>
+        <button class="btn-cancel" onclick="cancelAdd()">Cancel</button>
+      </div>
+    </section>
+
+    <div id="servicesGrid" role="list"></div>
+
+    <button id="addServiceBtn" onclick="showAddService()" aria-label="Add a new service">Add New Service</button>
+  </main>
+
+  <footer role="contentinfo">
+    &copy; 2025 3MTPS Pvt Ltd. All rights reserved.
+  </footer>
+
+  <script>
+    const VALID_USERNAME = "3MTPS";
+    const VALID_PASSWORD = "3MTPS@123";
+
+    let services = JSON.parse(localStorage.getItem('services')) || [
+      {
+        id: 1,
+        title: "Gold Loans",
+        description: `We offer secure loans where you can borrow up to 50% of the value of your assets,
+        such as gold, land, houses, or plots. For example, if your gold is valued at 1 Lakh,
+        you can receive 50,000. Our interest rate is exceptionally low – just 1 per 100 per month.`,
+        colorClass: "goldloans",
+        imagePath: "images/gold-loans.jpg"
+      },
+      {
+        id: 2,
+        title: "Edible Oils",
+        description: `We bring you a wide range of high-quality edible oils – groundnuts,
+        sunflower seeds, sesame seeds, coconuts, cashews, mustard seeds, and more.
+        Sourced directly from farmers, processed with care, and offered at very low profit margins.`,
+        colorClass: "edibleoils",
+        imagePath: "images/edible-oils.jpg"
+      },
+      {
+        id: 3,
+        title: "Dry Fruits",
+        description: `Best-quality dry fruits such as cashews, almonds, dates. Freshly collected and packed with a focus on quality and quantity at affordable prices.`,
+        colorClass: "dryfruits",
+        imagePath: "images/dry-fruits.jpg"
+      },
+      {
+        id: 4,
+        title: "Spices & Kitchen Essentials",
+        description: `Farm-fresh premium spices like chili, coriander, turmeric, cumin, garam masala, and more,
+        with hygienic packaging and low margins for affordability.`,
+        colorClass: "spices",
+        imagePath: "images/spices.jpg"
+      },
+      {
+        id: 5,
+        title: "Millets & Pulses",
+        description: `Wide variety of millets and pulses like green gram, pigeon pea, black gram,
+        chickpeas, lentils, horse gram, kidney beans sourced from dedicated farmers with ISI marks.`,
+        colorClass: "millets",
+        imagePath: "images/millets-pulses.jpg"
+      },
+      {
+        id: 6,
+        title: "Fruits & Vegetables",
+        description: `Seasonal, garden-fresh fruits and vegetables picked at peak ripeness and delivered with care for quality and taste.`,
+        colorClass: "produce",
+        imagePath: "images/fruits-vegetables.jpg"
+      },
+      {
+        id: 7,
+        title: "Dry Fish & Mutton",
+        description: `Premium dry fish, prawns, and mutton, sourced directly for authentic taste and high quality.`,
+        colorClass: "dynamodb",
+        imagePath: "images/dry-fish-mutton.jpg"
+      },
+      {
+        id: 8,
+        title: "Education Consultancy",
+        description: `Bridge to top institutions with real-time info about seats and fees for smooth admissions.`,
+        colorClass: "education",
+        imagePath: "images/education-consultancy.jpg"
+      },
+      {
+        id: 9,
+        title: "Fertilizers & Agro Medicines",
+        description: `High-quality ISI-certified fertilizers and medicines from global brands to support farmers.`,
+        colorClass: "fertilizers",
+        imagePath: "images/fertilizers.jpg"
+      },
+      {
+        id: 10,
+        title: "Legal Knowledge",
+        description: `Detailed guidance on family law, civil disputes, criminal cases, and company law with sample documents.`,
+        colorClass: "legal",
+        imagePath: "images/legal-knowledge.jpg"
+      },
+      {
+        id: 11,
+        title: "Notebook Supply",
+        description: `High-quality notebooks for all educational levels from LKG to PhD.`,
+        colorClass: "notebooks",
+        imagePath: "images/notebooks.jpg"
+      }
+    ];
+
+    let nextId = services.length + 1;
+
+    function saveServices() {
+      localStorage.setItem('services', JSON.stringify(services));
+    }
+
+    function renderServices() {
+      const container = document.getElementById('servicesGrid');
+      container.innerHTML = ''; // Clear existing
+      services.forEach(service => {
+        const card = document.createElement('article');
+        card.className = `service-card ${service.colorClass}`;
+        card.setAttribute('role', 'listitem');
+        card.dataset.id = service.id;
+
+        const img = document.createElement('img');
+        img.src = service.imagePath;
+        img.alt = service.title;
+        img.className = 'service-image';
+        card.appendChild(img);
+
+        const title = document.createElement('h3');
+        title.textContent = service.title;
+        title.className = 'service-title editable';
+        title.contentEditable = false;
+        title.setAttribute('aria-label', 'Service title');
+        card.appendChild(title);
+
+        const desc = document.createElement('p');
+        desc.textContent = service.description;
+        desc.className = 'service-description editable';
+        desc.contentEditable = false;
+        desc.setAttribute('aria-label', 'Service description');
+        card.appendChild(desc);
+
+        const btnContainer = document.createElement('div');
+        btnContainer.className = 'btn-container';
+
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn btn-edit';
+        editBtn.textContent = 'Edit';
+        editBtn.setAttribute('aria-label', `Edit ${service.title} service`);
+        editBtn.onclick = () => toggleEdit(card);
+        btnContainer.appendChild(editBtn);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn btn-remove';
+        removeBtn.textContent = 'Remove';
+        removeBtn.setAttribute('aria-label', `Remove ${service.title} service`);
+        removeBtn.onclick = () => removeService(service.id);
+        btnContainer.appendChild(removeBtn);
+
+        card.appendChild(btnContainer);
+
+        container.appendChild(card);
+      });
+    }
+
+    function toggleEdit(card) {
+      const editableElements = card.querySelectorAll('.editable');
+      const editBtn = card.querySelector('.btn-edit');
+
+      if (editBtn.textContent === 'Edit') {
+        editableElements.forEach(el => {
+          el.contentEditable = true;
+          el.focus();
+          el.style.backgroundColor = 'rgba(255,255,255,0.8)';
+          el.style.border = '2px dashed #0077c8';
+          el.style.borderRadius = '7px';
+        });
+        editBtn.textContent = 'Save';
+        editBtn.style.backgroundColor = '#35b63d';
+      } else {
+        const id = parseInt(card.dataset.id);
+        const service = services.find(s => s.id === id);
+        const titleEl = card.querySelector('.service-title');
+        const descEl = card.querySelector('.service-description');
+        service.title = titleEl.textContent.trim();
+        service.description = descEl.textContent.trim();
+
+        editableElements.forEach(el => {
+          el.contentEditable = false;
+          el.style.backgroundColor = 'transparent';
+          el.style.border = 'none';
+        });
+        editBtn.textContent = 'Edit';
+        editBtn.style.backgroundColor = '#f7c948';
+        saveServices();
+      }
+    }
+
+    function removeService(id) {
+      if (confirm('Are you sure to remove this service?')) {
+        services = services.filter(s => s.id !== id);
+        saveServices();
+        renderServices();
+      }
+    }
+
+    function showAddService() {
+      document.getElementById('addServiceArea').style.display = 'flex';
+      document.getElementById('addServiceBtn').style.display = 'none';
+    }
+
+    function cancelAdd() {
+      document.getElementById('addServiceArea').style.display = 'none';
+      document.getElementById('addServiceBtn').style.display = 'block';
+      clearAddFields();
+    }
+
+    function clearAddFields() {
+      document.getElementById('newTitle').value = '';
+      document.getElementById('newDesc').value = '';
+      document.getElementById('newImage').value = '';
+    }
+
+    function saveNewService() {
+      const title = document.getElementById('newTitle').value.trim();
+      const description = document.getElementById('newDesc').value.trim();
+      const imagePath = document.getElementById('newImage').value.trim() || 'images/default-placeholder.jpg';
+
+      if (!title || !description) {
+        alert('Please fill in both title and description.');
+        return;
+      }
+
+      const colorClasses = ['goldloans', 'edibleoils', 'dryfruits', 'spices', 'millets', 'produce', 'dynamodb', 'education', 'fertilizers', 'legal', 'notebooks'];
+      const colorClass = colorClasses[nextId % colorClasses.length];
+
+      services.push({
+        id: nextId++,
+        title,
+        description,
+        imagePath,
+        colorClass
+      });
+
+      saveServices();
+      renderServices();
+      cancelAdd();
+    }
+
+    function filterServices() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const container = document.getElementById('servicesGrid');
+      const cards = container.querySelectorAll('.service-card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('.service-title').textContent.toLowerCase();
+        const desc = card.querySelector('.service-description').textContent.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorDiv = document.getElementById('errorMsg');
+
+      if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+        document.getElementById('loginBox').style.display = 'none';
+        document.querySelector('main').style.display = 'flex';
+        errorDiv.textContent = '';
+        renderServices();
+      } else {
+        errorDiv.textContent = 'Invalid username or password.';
+      }
+    }
+  </script>
+</body>
+
+</html>
