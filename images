@@ -89,7 +89,7 @@
       { title: "Fruits & Vegetables", desc: "Fresh fruits and vegetables sourced directly from farmers. We ensure quality, taste, and nutritional value in every product.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/fruits%20and%20vegitables.png", class:"fruits" },
       { title: "Eduction & Consultancy Services", desc: "Professional consultancy for personal and business needs. Our experts provide reliable guidance to help you succeed.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/consultency%20img.png", class:"consultancy" },
       { title: "Bags & Clothes Making", desc: "High-quality bags and clothing manufactured with care. Our products combine style, durability, and functionality.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/bags%20making%20-%20Copy.png", class:"bags" },
-      { title: "Entertainment", desc: "Organizing events and entertainment services for community enjoyment. Our 3MTPS family brings fun and happiness to everyone.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/entertainment%20-%20Copy.png", class:"entertainment" }
+      { title: "Entertainment & Networking supply", desc: "Organizing events and entertainment services for community enjoyment. Our 3MTPS family brings fun and happiness to everyone.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/entertainment%20-%20Copy.png", class:"entertainment" }
     ];
 
     const colors = ['#e03c31','#fbb034','#fff100','#31bc47','#2196f3','#9c27b0','#ff4081','#00bcd4','#ff9800','#8bc34a'];
