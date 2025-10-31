@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3MTPS Pvt Ltd - Professional Services</title>
+  <style>
+    body {margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f6fb;color:#222;}
+    header{background:#003a5d;padding:30px 0 10px;color:white;text-align:center;box-shadow:0 8px 16px rgba(0,119,200,0.6);}
+    .company-name{font-size:3.2rem;font-weight:900;letter-spacing:5px;margin-bottom:5px;}
+    .company-name span{display:inline-block;animation:glow 2.5s ease-in-out infinite alternate;}
+    .company-name span:nth-child(1){color:#e03c31;}
+    .company-name span:nth-child(2){color:#fbb034;}
+    .company-name span:nth-child(3){color:#fff100;}
+    .company-name span:nth-child(4){color:#31bc47;}
+    .company-name span:nth-child(5){color:#2196f3;}
+    @keyframes glow{0%{text-shadow:0 0 5px currentColor;}100%{text-shadow:0 0 25px currentColor;}}
+    header p.tagline{font-size:1.2rem;opacity:0.8;letter-spacing:0.15em;margin-bottom:10px;font-weight:600;}
+    #loginBox{background:white;box-shadow:0 10px 50px rgb(0 83 165 / 0.25);max-width:400px;margin:4rem auto;border-radius:12px;padding:30px;text-align:center;}
+    #loginBox h2{margin-bottom:25px;font-weight:700;}
+    #loginBox input{width:80%;padding:12px;margin-bottom:20px;font-size:1.1rem;border-radius:8px;border:2px solid #ddd;}
+    #loginBox button{font-size:1.25rem;background:#0077c8;color:white;border:none;padding:12px 40px;border-radius:10px;font-weight:bold;cursor:pointer;}
+    main{max-width:1100px;margin:0 auto 2rem;display:none;flex-direction:column;gap:25px;padding:0 20px;}
+    #servicesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;}
+    .service-card{border-radius:18px;padding:20px 22px 30px;box-shadow:0 12px 35px rgb(0 119 200 / 0.15);color:#fff;transition:transform 0.2s ease;}
+    .service-card:hover{transform:translateY(-8px);}
+    .service-image{width:100%;border-radius:15px;box-shadow:0 8px 22px rgb(0 0 0 / 0.25);margin-bottom:18px;object-fit:cover;aspect-ratio:4/3;}
+    footer{text-align:center;padding:1rem;background:#003a5d;color:#fff;}
+    .goldloans{background:linear-gradient(135deg,#fed766,#f7b733);color:#243342;}
+    .edibleoils{background:linear-gradient(135deg,#6dd5ed,#2193b0);}
+    .dryfruits{background:linear-gradient(135deg,#fbc1cc,#f87291);}
+    .spices{background:linear-gradient(135deg,#f7971e,#ffd200);color:#3a2f0b;}
+    .millets{background:linear-gradient(135deg,#3a7bd5,#00d2ff);}
+    .produce{background:linear-gradient(135deg,#43cea2,#185a9d);}
+    .education{background:linear-gradient(135deg,#6a11cb,#2575fc);}
+    .fertilizers{background:linear-gradient(135deg,#76b852,#8DC26F);}
+    .notebooks{background:linear-gradient(135deg,#29c7ec,#046893);}
+    .consultancy{background:linear-gradient(135deg,#ff7e5f,#feb47b);}
+    .bags{background:linear-gradient(135deg,#f7971e,#ffd200);color:#3a2f0b;}
+    .entertainment{background:linear-gradient(135deg,#ff4e50,#f9d423);}
+    .fruits{background:linear-gradient(135deg,#43cea2,#185a9d);}
+    .watersupply{background:linear-gradient(135deg,#00c6ff,#0072ff);}
+    .pulses{background:linear-gradient(135deg,#fbc1cc,#f87291);}
+    .dryfish{background:linear-gradient(135deg,#d66d75,#e29587);}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="company-name"><span>3</span><span>M</span><span>T</span><span>P</span><span>S</span> Pvt Ltd</div>
+    <p class="tagline">Money Makes Many Things - Public Service Pvt Ltd</p>
+    <p class="tagline">Public Health and Wealth is Our 3MTPS Family Happiness</p>
+  </header>
 
+  <div id="loginBox">
+    <h2>Enter Global Key to Access Services</h2>
+    <div id="errorMsg" style="color:red;"></div>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+  </div>
+
+  <main>
+    <div id="servicesGrid"></div>
+  </main>
+
+  <footer>&copy; 2025 3MTPS Pvt Ltd. All Rights Reserved.</footer>
+
+  <script>
+    const VALID_USERNAME = "3MTPS";
+    const VALID_PASSWORD = "3MTPS@123";
+
+    const services = [
+      { title: "Gold Loans", desc: "Loans up to 50% of gold value with just 1% interest monthly.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/gold%20image%201.png", class:"goldloans" },
+      { title: "Edible Oils", desc: "Groundnut, sunflower, sesame, and coconut oils from farmers.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/edible%20oils.png", class:"edibleoils" },
+      { title: "Dry Fruits", desc: "Cashews, almonds, and dates - fresh and affordable.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/3mt%20dryfruits.png", class:"dryfruits" },
+      { title: "Dry Fish & Mutton", desc: "Premium dried fish, prawns, and mutton of top quality.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/dry%20fish%20and%20dry%20motton.png", class:"dryfish" },
+      { title: "Spices & Kitchen Essentials", desc: "Fresh turmeric, chili, and coriander from organic farms.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/kitchen%20spices.png", class:"spices" },
+      { title: "Notebook Supply", desc: "Notebooks and stationery from LKG to PhD level.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/note%20books%20stationery.png", class:"notebooks" },
+      { title: "Water Supply", desc: "Drinking water with essential minerals for health and wealth.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/water%20pic.png", class:"watersupply" },
+      { title: "Pulses and Millets", desc: "Tasty and nutritious food without compromising quality.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/millets%20and%20pulses.png", class:"pulses" },
+      { title: "Fertilizers", desc: "High-quality fertilizers for better crop yield.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/fertilizers.png", class:"fertilizers" },
+      { title: "Education", desc: "Learning materials and services for students of all levels.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/education.png", class:"education" },
+      { title: "Fruits & Vegetables", desc: "Fresh fruits and vegetables sourced from farmers.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/fruits%20and%20vegitables.png", class:"fruits" },
+      { title: "Consultancy Services", desc: "Professional consultancy for your business and personal needs.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/consultency%20img.png", class:"consultancy" },
+      { title: "Bags & Clothes Making", desc: "Quality bags and clothes manufactured with care.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/bags%20making%20-%20Copy.png", class:"bags" },
+      { title: "Entertainment", desc: "Events and entertainment services for community happiness.", img: "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/entertainment%20-%20Copy.png", class:"entertainment" }
+    ];
+
+    function login() {
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      const msg = document.getElementById('errorMsg');
+      if (u === VALID_USERNAME && p === VALID_PASSWORD) {
+        document.getElementById('loginBox').style.display = 'none';
+        document.querySelector('main').style.display = 'flex';
+        renderServices();
+      } else {
+        msg.textContent = "Invalid global key.";
+      }
+    }
+
+    function renderServices() {
+      const grid = document.getElementById('servicesGrid');
+      grid.innerHTML = "";
+      services.forEach(s => {
+        const card = document.createElement('div');
+        card.className = `service-card ${s.class}`;
+        card.innerHTML = `
+          <img src="${s.img}" alt="${s.title}" class="service-image" 
+               onerror="this.src='https://via.placeholder.com/400x300?text=3MTPS+Service+Image'">
+          <h3 class="service-title">${s.title}</h3>
+          <p class="service-description">${s.desc}</p>`;
+        grid.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
