@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3MTPS Family Invitation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  /* LOGIN SCREEN */
+  #loginScreen {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: opacity 1s ease;
+  }
+  #loginBox {
+    background: rgba(255,215,0,0.1);
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 0 40px #ffd70055;
+  }
+  #loginBox h1 {
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    color: #ffd700;
+    text-shadow: 0 0 15px #ffd700;
+  }
+  #loginBox input {
+    display: block;
+    margin: 10px auto;
+    padding: 12px 18px;
+    width: 280px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+  }
+  #loginBtn {
+    background: #e91e63;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  #loginBtn:hover { background: #ff4081; }
+
+  /* SLIDESHOW */
+  .slideshow-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .slide.active { opacity: 1; }
+  .slide-title {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 2.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    padding: 20px 0;
+    color: #ffd700;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div id="loginBox">
+    <h1>Welcome to 3MTPS Family Invitation</h1>
+    <input type="text" id="username" placeholder="Enter Username" />
+    <input type="password" id="password" placeholder="Enter Password" />
+    <input type="button" id="loginBtn" value="Enter" />
+    <p id="loginMsg" style="margin-top:10px;color:#f66;"></p>
+  </div>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="slideshow-container" id="slideshow"></div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://cdn.pixabay.com/audio/2022/11/14/audio_1abef88b59.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const USERNAME = "3MTPS";
+  const PASSWORD = "3MTPS@123";
+  const loginBtn = document.getElementById('loginBtn');
+  const loginMsg = document.getElementById('loginMsg');
+  const loginScreen = document.getElementById('loginScreen');
+  const audio = document.getElementById('bgMusic');
+
+  loginBtn.addEventListener('click', () => {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    if (u === USERNAME && p === PASSWORD) {
+      loginMsg.textContent = "Access Granted ✔";
+      setTimeout(() => {
+        loginScreen.style.opacity = 0;
+        setTimeout(() => loginScreen.remove(), 1000);
+        startSlideshow();
+        audio.play().catch(()=>{});
+      }, 500);
+    } else {
+      loginMsg.textContent = "Invalid Username or Password ✖";
+    }
+  });
+
+  const services = [
+    { img: "gold%20image%201.png", title: "Gold Loans" },
+    { img: "edible%20oils.png", title: "Edible Oils" },
+    { img: "3mt%20dryfruits.png", title: "Dry Fruits" },
+    { img: "dry%20fish%20and%20dry%20motton.png", title: "Dry Fish & Mutton" },
+    { img: "kitchen%20spices.png", title: "Spices & Kitchen Essentials" },
+    { img: "note%20books%20stationery.png", title: "Notebooks & Stationery" },
+    { img: "water%20pic.png", title: "Drinking Water Supply" },
+    { img: "millets%20and%20pulses.png", title: "Millets & Pulses" },
+    { img: "fertilizers.png", title: "Fertilizers" },
+    { img: "education.png", title: "Education Consultancy" },
+    { img: "fruits%20and%20vegitables.png", title: "Fruits & Vegetables" },
+    { img: "consultency%20img.png", title: "Legal Knowledge" },
+    { img: "bags%20making%20-%20Copy.png", title: "Clothes & Bags Supply" },
+    { img: "entertainment%20-%20Copy.png", title: "Entertainment Services" },
+    { img: "transport.jpg", title: "Transport Logistics" },
+    { img: "the%20best%20wine.jpg", title: "Homemade Grape Wine" },
+    { img: "article%203mtps.jpg", title: "Articles Supply" }
+  ];
+
+  const IMAGE_BASE = "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/";
+
+  function startSlideshow() {
+    const slideshow = document.getElementById('slideshow');
+    services.forEach((service) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide';
+      slide.innerHTML = `
+        <img src="${IMAGE_BASE}${service.img}" alt="${service.title}"
+             onerror="this.src='https://via.placeholder.com/1920x1080/333/fff?text=${service.title}'">
+        <div class="slide-title">${service.title}</div>`;
+      slideshow.appendChild(slide);
+    });
+
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+    if (slides.length > 0) slides[0].classList.add('active');
+
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4500);
+  }
+
+  audio.volume = 0.35;
+  audio.play().catch(() => {
+    document.addEventListener('click', () => audio.play(), { once: true });
+  });
+</script>
+</body>
+</html>
 
