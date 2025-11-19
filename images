@@ -24,9 +24,8 @@
   #servicesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;}
   .service-card{border-radius:18px;padding:20px 22px 30px;box-shadow:0 12px 35px rgb(0 119 200 / 0.15);color:#fff;transition:transform 0.2s ease;background:#1a1a1a;}
   .service-card:hover{transform:translateY(-8px);}
-  .service-image{width:100%;border-radius:15px;box-shadow:0 8px 22px rgb(0 0 0 / 0.25);margin-bottom:18px;object-fit:cover;aspect-ratio:4/3;}
+  .service-image{width:100%;height:220px;border-radius:15px;box-shadow:0 8px 22px rgb(0 0 0 / 0.25);margin-bottom:18px;object-fit:cover;}
   .service-title{font-size:1.5rem;font-weight:bold;margin-bottom:12px;}
-  .service-title span{display:inline-block;margin-right:6px;}
   .service-description{background:#fff;color:#222;padding:15px;border-radius:10px;line-height:1.5rem;box-shadow:0 6px 15px rgba(0,0,0,0.2);}
   footer{text-align:center;padding:2rem 1rem;background:#003a5d;color:#fff;}
   .about-us-btn{display:block;margin:20px auto;padding:12px 25px;font-size:1.1rem;font-weight:bold;background:#2196f3;color:white;border:none;border-radius:10px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.25);}
@@ -36,7 +35,6 @@
   @keyframes fadeIn{0%{opacity:0;transform:translateY(-10px);}100%{opacity:1;transform:translateY(0);}}
 </style>
 </head>
-
 <body>
   <header>
     <div class="company-name"><span>3</span><span>M</span><span>T</span><span>P</span><span>S</span> Pvt Ltd</div>
@@ -57,49 +55,50 @@
     <button class="about-us-btn" onclick="toggleAboutUs()">About Us</button>
     <div class="about-us-content" id="aboutUsContent">
       <h3>About 3MTPS Pvt Ltd</h3>
-      <p><strong>Company Name:</strong> 3MTPS PVT LTD</p>
-      <p><strong>Founder Name:</strong> Murali Gangapuri</p>
+      <p><strong>Founder:</strong> Murali Gangapuri (MCA, LLB)</p>
       <p><strong>Phone:</strong> 9052806225</p>
       <p><strong>Email:</strong> 3mtps@gmail.com</p>
-      <p><strong>Address:</strong> Sriram Nagar, Office: 5-102 </p>
-      <p><strong>What We Offer:</strong> The 3MTPS family provides premium services including gold loans, edible oils, dry fruits, pulses, spices, fertilizers, stationery, and more. Our main focus is customer health, wealth, and satisfaction.</p>
-      <p>Our goal is to enrich the lives of our customers through excellent products and services. With 3MTPS, save money, save health, and live happily!</p>
+      <p><strong>Address:</strong> Sriram Nagar, Miryalaguda - 508207</p>
+      <p>We are a family-run public service company with 21+ services focused on Health, Wealth & Happiness.</p>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 3MTPS Pvt Ltd. All Rights Reserved.</p>
+    <p>© 2025 3MTPS Pvt Ltd. All Rights Reserved.</p>
   </footer>
 
   <script>
     const VALID_USERNAME = "3MTPS";
     const VALID_PASSWORD = "3MTPS@123";
-
-    const IMAGE_BASE = "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/";
+    const IMG = "https://raw.githubusercontent.com/gangapu/3MTPS-Website/main/";
 
     const services = [
-      { title: "Gold Loans", desc: "Our 3MTPS family offers loans up to 50% of your gold value at a minimal 1% monthly interest. We prioritize transparency and customer trust.", img: IMAGE_BASE + "gold%20image%201.png" },
-      { title: "Edible Oils", desc: "We provide a variety of edible oils including groundnut, sunflower, sesame, and coconut.", img: IMAGE_BASE + "edible%20oils.png" },
-      { title: "Dry Fruits", desc: "Cashews, almonds, dates, and more. We ensure high quality and freshness.", img: IMAGE_BASE + "3mt%20dryfruits.png" },
-      { title: "Dry Fish & Dry Mutton", desc: "Premium dried fish, prawns, and mutton with rich flavor.", img: IMAGE_BASE + "dry%20fish%20and%20dry%20motton.png" },
-      { title: "Spices & Kitchen Essentials", desc: "Fresh turmeric, chili, coriander, and more.", img: IMAGE_BASE + "kitchen%20spices.png" },
-      { title: "Notebooks Supply", desc: "High-quality notebooks and stationery.", img: IMAGE_BASE + "note%20books%20stationery.png" },
-      { title: "Water Supply", desc: "Pure drinking water enriched with essential minerals.", img: IMAGE_BASE + "water%20pic.png" },
-      { title: "Pulses and Millets", desc: "Nutritious and tasty pulses and millets.", img: IMAGE_BASE + "millets%20and%20pulses.png" },
-      { title: "Fertilizers & Seeds Supply", desc: "High-quality fertilizers for better crops.", img: IMAGE_BASE + "fertilizers.png" },
-      { title: "Legal Education", desc: "Educational materials and services for students.", img: IMAGE_BASE + "education.png" },
-      { title: "Fruits & Vegetables", desc: "Fresh fruits and vegetables from local farmers.", img: IMAGE_BASE + "fruits%20and%20vegitables.png" },
-      { title: "Education & Consultancy Services", desc: "Professional consultancy for business and education.", img: IMAGE_BASE + "consultency%20img.png" },
-      { title: "Bags & Clothes Making", desc: "Stylish and durable bags and clothing.", img: IMAGE_BASE + "bags%20making%20-%20Copy.png" },
-      { title: "Entertainment & Networking Supply", desc: "Fun and entertainment services for all ages.", img: IMAGE_BASE + "entertainment%20-%20Copy.png" },
-      { title: "Transport Services", desc: "Safe and reliable transport for goods and passengers.", img: IMAGE_BASE + "transport.jpg" },
-      { title: "Home-made Grape Wine Supply", desc: "Hygienically prepared grape wine.", img: IMAGE_BASE + "the%20best%20wine.jpg" },
-      { title: "Free Study Articles (Social Welfare)", desc: "Educational resources promoting social welfare.", img: IMAGE_BASE + "article%203mtps.jpg" },
-      // ✅ NEW SERVICE ADDED
-      { title: "Dry Feed for Domestic Animals", desc: "3MTPS now supplies nutritious dry feed for cows, goats, dogs, and other domestic animals to promote their health and growth.", img: IMAGE_BASE + "dry%20feed%20for%20domastic%20animals.png" }
+      { title: "3MTPS Gold Loans", desc: "Safe gold loans at lowest interest.", img: IMG + "gold%20image%201.png" },
+      { title: "3MTPS Edible Oils", desc: "Pure & healthy cooking oils.", img: IMG + "edible%20oils.png" },
+      { title: "3MTPS Dry Fruits", desc: "Premium quality nuts & dates.", img: IMG + "3mt%20dryfruits.png" },
+      { title: "3MTPS Dry Fish & Mutton", desc: "Rich traditional taste.", img: IMG + "dry%20fish%20and%20dry%20motton.png" },
+      { title: "3MTPS Spices", desc: "Fresh & aromatic kitchen essentials.", img: IMG + "kitchen%20spices.png" },
+      { title: "3MTPS Notebooks", desc: "Best stationery for students.", img: IMG + "note%20books%20stationery.png" },
+      { title: "3MTPS Mineral Water", desc: "Pure water with perfect minerals.", img: IMG + "water%20pic.png" },
+      { title: "3MTPS Pulses & Millets", desc: "Healthy grains for daily nutrition.", img: IMG + "millets%20and%20pulses.png" },
+      { title: "3MTPS Fertilizers", desc: "High-quality for better yield.", img: IMG + "fertilizers.png" },
+      { title: "3MTPS Legal Education", desc: "Free guidance & support.", img: IMG + "education.png" },
+      { title: "3MTPS Fruits & Veg", desc: "Farm-fresh direct delivery.", img: IMG + "fruits%20and%20vegitables.png" },
+      { title: "3MTPS Consultancy", desc: "Expert business & education advice.", img: IMG + "consultency%20img.png" },
+      { title: "3MTPS Bags & Clothes", desc: "Stylish & durable products.", img: IMG + "bags%20making%20-%20Copy.png" },
+      { title: "3MTPS Entertainment", desc: "Laughter is our network!", img: IMG + "entertainment%20-%20Copy.png" },
+      { title: "3MTPS Transport", desc: "Safe & reliable services.", img: IMG + "transport.jpg" },
+      { title: "3MTPS Grape Wine", desc: "Pure homemade delight.", img: IMG + "the%20best%20wine.jpg" },
+      { title: "3MTPS Study Articles", desc: "Free education for all.", img: IMG + "article%203mtps.jpg" },
+      { title: "3MTPS Animal Feed", desc: "Nutritious feed for livestock.", img: IMG + "dry%20feed%20for%20domastic%20animals.png" },
+
+      // YOUR LATEST 3 SERVICES WITH NEW IMAGES
+      { title: "3MTPS Online Voting System", desc: "Secure & fair voting — ₹2 per vote, no duplicates allowed.", img: IMG + "3mtps online voting system.png.png" },
+      { title: "3MTPS Family Care Fund", desc: "Lifetime monthly support for helpless surname/caste families through safe 1.5% interest ❤️", img: IMG + "3mtps family care fund life time.png.jpg" },
+      { title: "3MTPS Garage", desc: "Unity is Strength! We solve family, civil, criminal, land & social issues together.", img: IMG + "3mtps garage .png.jpg" }
     ];
 
-    const colors = ['#e03c31','#fbb034','#fff100','#31bc47','#2196f3','#9c27b0','#ff4081','#00bcd4','#ff9800','#8bc34a'];
+    const colors = ['#e03c31','#fbb034','#fff100','#31bc47','#2196f3','#9c27b0','#ff4081','#00bcd4','#ff9800','#8bc34a','#e91e63','#4caf50','#ff5722','#607d8b','#9c27b0','#00bcd4','#ff9800','#ff4081','#2196f3','#cddc39','#e91e63'];
 
     function login() {
       const u = document.getElementById('username').value.trim();
@@ -123,7 +122,7 @@
         card.className = "service-card";
         card.innerHTML = `
           <img src="${s.img}" alt="${s.title}" class="service-image"
-               onerror="this.src='https://via.placeholder.com/400x300?text=3MTPS+Service'">
+               onerror="this.src='https://via.placeholder.com/400x300/003a5d/ffffff?text=3MTPS+Service'">
           <h3 class="service-title" style="color:${color}">${s.title}</h3>
           <p class="service-description">${s.desc}</p>
         `;
@@ -134,7 +133,7 @@
     function toggleAboutUs() {
       const content = document.getElementById('aboutUsContent');
       content.style.display = content.style.display === 'block' ? 'none' : 'block';
-      content.scrollIntoView({behavior:"smooth"});
+      if (content.style.display === 'block') content.scrollIntoView({behavior:"smooth"});
     }
   </script>
 </body>
