@@ -464,7 +464,7 @@ const serviceData = [
     },
     {
         title: "3MTPS Mineral Water",
-        img: IMG + "water%20pic.png",
+        img: IMG + "3MTPS WATER.png",
         content: `
             <div style="padding:25px;font-family:Segoe UI, sans-serif;line-height:1.7;background-color:#f0f8ff;">
                 <h1 style="font-size:38px;font-weight:900;
@@ -951,3 +951,4 @@ document.getElementById('luxError').textContent = 'Invalid credentials!';
 </script>
 </body>
 </html>
+
