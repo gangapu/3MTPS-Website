@@ -212,28 +212,6 @@ box-shadow: 0 2px 5px rgba(33, 150, 243, 0.4);
 &nbsp;
 <span style="color:#FB8C00;">L</span><span style="color:#7CB342;">T</span><span style="color:#6D4C41;">D</span>
 </h1>
-<p class="tagline1">
-<span style="color:#4285F4;">Money</span>
-<span style="color:#EA4335;"> Makes</span>
-<span style="color:#FBBC05;"> Many</span>
-<span style="color:#34A853;"> Things</span>
-<span style="color:#4285F4;"> Public</span>
-<span style="color:#EA4335;"> Service</span>
-<span style="color:#FBBC05;"> Pvt</span>
-<span style="color:#34A853;"> Ltd</span>
-</p>
-<p class="tagline2">
-<span style="color:#4285F4;">Public</span>
-<span style="color:#EA4335;"> Health</span>
-<span style="color:#FBBC05;"> and</span>
-<span style="color:#34A853;"> Wealth</span>
-<span style="color:#4285F4;"> are</span>
-<span style="color:#EA4335;"> Our</span>
-<span style="color:#FBBC05;"> 3MTPS</span>
-<span style="color:#34A853;"> Family</span>
-<span style="color:#EA4335;"> Greatest</span>
-<span style="color:#4285F4;"> Happiness</span>
-</p>
 <form id="luxuryForm">
 <input type="text" id="luxUser" placeholder="Username" required>
 <input type="password" id="luxPass" placeholder="Password" required>
